@@ -1,0 +1,157 @@
+@use 'sass:math';
+
+%flex-layout {
+  width: 100%;
+}
+
+header {
+  &>div {
+    &>div {
+      &>div {
+        .theme-toggle {
+          cursor: pointer;
+          touch-action: manipulation;
+          -webkit-tap-highlight-color: transparent;
+
+          &>svg {
+            inline-size: 100%;
+            block-size: 100%;
+            stroke-linecap: round;
+          }
+        }
+
+        &>a {
+          transition: all .1s var(--ease-3);
+
+          &>svg {
+            aspect-ratio: 1;
+            block-size: 100%;
+            inline-size: 100%;
+          }
+        }
+      }
+
+    }
+  }
+
+  .bg-position {
+    background-position: bottom;
+  }
+}
+
+.c-hamburger {
+  @include aspect-ratio(1, 1);
+  overflow: hidden;
+  inline-size: 1.56rem;
+  block-size: 1.56rem;
+
+  &:focus {
+    outline: 0;
+  }
+
+  span {
+    height: 2px;
+    display: block;
+    margin-top: -1px;
+    position: absolute;
+    right: 0px;
+    left: 0px;
+    top: 50%;
+
+    &::after {
+      content: "";
+      width: 100%;
+      height: 2px;
+      display: block;
+      border-radius: 1px;
+      transition: background 0.4s var(--ease-3);
+      background: var(--tm-slate-400);
+      position: absolute;
+      left: 0;
+
+      .dark & {
+        background: var(--tm-sky);
+      }
+    }
+
+    &::before {
+      content: "";
+      width: 100%;
+      height: 2px;
+      display: block;
+      border-radius: 1px;
+      transition: background 0.4s var(--ease-3);
+      background: var(--tm-slate-400);
+      position: absolute;
+      left: 0;
+      top: -4px;
+
+      .dark & {
+        background: var(--tm-sky);
+      }
+    }
+
+    &::after {
+      bottom: -4px;
+    }
+  }
+}
+
+.c-hamburger--htx {
+  background: transparent;
+
+  span {
+    transition: background 0s .3s;
+
+    &::after {
+      transition-duration: .3s, .3s;
+      transition-delay: .3s, 0s;
+    }
+
+    &::before {
+      transition-duration: .3s, .3s;
+      transition-delay: .3s, 0s;
+      transition-property: top, transform;
+    }
+
+    &::after {
+      transition-property: bottom, transform;
+    }
+  }
+
+  &.is-active span {
+    background: 0 0;
+
+    &::before {
+      transform: rotate(45deg);
+      top: 0;
+    }
+
+    &::after {
+      transform: rotate(-45deg);
+      bottom: 0;
+      background: var(--tm-slate-400);
+      transition-delay: 0s, .3s;
+
+      .dark & {
+        background: var(--tm-sky);
+      }
+    }
+
+    &::before {
+      background: var(--tm-slate-400);
+      transition-delay: 0s, .3s;
+
+      .dark & {
+        background: var(--tm-sky);
+      }
+    }
+  }
+}
+
+// @each $key,
+// $val in $colors {
+//   .navbar-#{$key} {
+//     background-color: $val;
+//   }
+// }

@@ -1,0 +1,344 @@
+@use 'sass:math';
+
+.bg-transparent {
+  background-color: transparent;
+}
+
+
+.dark\:bg-transparent {
+  .dark & {
+    background-color: transparent;
+  }
+}
+
+.border-current {
+  border-color: currentColor
+}
+
+.border-transparent {
+  border-color: transparent;
+}
+
+.dark\:border-transparent {
+  .dark & {
+    border-color: transparent;
+  }
+}
+
+@each $key in map-keys(map-get($palette, colors)) {
+  $val: map-deep-get($palette, "colors", $key);
+
+  .text-#{$key} {
+    color: $val;
+  }
+
+  .dark\:text-#{$key} {
+    .dark & {
+      color: $val;
+    }
+  }
+
+  .hover\:text-#{$key} {
+    &:hover {
+      color: $val;
+    }
+  }
+
+  .dark\:hover\:text-#{$key} {
+    .dark & {
+      &:hover {
+        color: $val;
+      }
+    }
+  }
+
+  .bg-#{$key} {
+    background-color: $val;
+  }
+
+  .dark\:bg-#{$key} {
+    .dark & {
+      background-color: $val;
+    }
+  }
+
+  .hover\:bg-#{$key} {
+    &:hover {
+      background-color: $val;
+    }
+  }
+
+  .dark\:hover\:bg-#{$key} {
+    .dark & {
+      &:hover {
+        background-color: $val;
+      }
+    }
+  }
+
+  .border-#{$key} {
+    border-color: $val;
+  }
+
+  .dark\:border-#{$key} {
+    .dark & {
+      border-color: $val;
+    }
+  }
+
+  .focus\:outline-#{$key} {
+    &:focus {
+      outline-color: $val
+    }
+  }
+
+  .dark\:focus\:outline-#{$key} {
+    .dark & {
+      &:focus {
+        outline-color: $val
+      }
+    }
+  }
+
+  /* alpha values */
+  @each $alpha in map-keys(map-get($palette, alpha)) {
+    $v: map-deep-get($palette, "alpha", $alpha);
+
+    @if ($key !='black' and $key !='white') {
+      .bg-#{$key}\/#{$alpha} {
+        background-color: rgb($val, math.div($v, 10));
+      }
+
+      .dark\:bg-#{$key}\/#{$alpha} {
+        .dark & {
+          background-color: rgb($val, math.div($v, 10));
+        }
+      }
+
+      .hover\:bg-#{$key}\/#{$alpha} {
+        &:hover {
+          background-color: rgb($val, math.div($v, 10));
+        }
+      }
+
+      .dark\:hover\:bg-#{$key}\/#{$alpha} {
+        .dark & {
+          &:hover {
+            background-color: rgb($val, math.div($v, 10));
+          }
+        }
+      }
+
+      .border-#{$key}\/#{$alpha} {
+        border-color: rgb($val, math.div($v, 10));
+      }
+
+      .dark\:border-#{$key}\/#{$alpha} {
+        .dark & {
+          border-color: rgb($val, math.div($v, 10));
+        }
+      }
+
+      .focus\:outline-#{$key}\/#{$alpha} {
+        &:focus {
+          outline-color: rgb($val, math.div($v, 10))
+        }
+      }
+
+      .dark\:focus\:outline-#{$key}\/#{$alpha} {
+        .dark & {
+          &:focus {
+            outline-color: rgb($val, math.div($v, 10))
+          }
+        }
+      }
+    }
+
+    @else {
+      .supports-backdrop-blur\:bg-#{$key}\/#{$alpha} {
+        @supports ((-webkit-backdrop-filter:blur(0)) or (backdrop-filter:blur(0))) or (-webkit-backdrop-filter:blur(0)) {
+          background-color: rgb($val, math.div($v, 10));
+        }
+      }
+    }
+  }
+
+  /*palettes*/
+  @each $shade,
+  $color in makeColorPalette($val) {
+    @if ($key !='black' and $key !='white') {
+      .text-#{$key}-#{$shade} {
+        color: $color;
+      }
+
+      .dark\:text-#{$key}-#{$shade} {
+        .dark & {
+          color: $color;
+        }
+      }
+
+      .hover\:text-#{$key}-#{$shade} {
+        &:hover {
+          color: $color;
+        }
+      }
+
+      .dark\:hover\:text-#{$key}-#{$shade} {
+        .dark & {
+          &:hover {
+            color: $color;
+          }
+        }
+      }
+
+      .bg-#{$key}-#{$shade} {
+        background-color: $color;
+      }
+
+      .dark\:bg-#{$key}-#{$shade} {
+        .dark & {
+          background-color: $color;
+        }
+      }
+
+      .hover\:bg-#{$key}-#{$shade} {
+        &:hover {
+          background-color: $color;
+        }
+      }
+
+      .dark\:hover\:bg-#{$key}-#{$shade} {
+        .dark & {
+          &:hover {
+            background-color: $color;
+          }
+        }
+      }
+
+      .border-#{$key}-#{$shade} {
+        border-color: $color;
+      }
+
+      .dark\:border-#{$key}-#{$shade} {
+        .dark & {
+          border-color: $color;
+        }
+      }
+
+      .focus\:outline-#{$key}-#{$shade} {
+        &:focus {
+          outline-color: $color
+        }
+      }
+
+      .dark\:focus\:outline-#{$key}-#{$shade} {
+        .dark & {
+          &:focus {
+            outline-color: $color
+          }
+        }
+      }
+
+      .group {
+        .group\:text-#{$key}-#{$shade} {
+          color: $color;
+        }
+
+        .dark\:group\:text-#{$key}-#{$shade} {
+          .dark & {
+            color: $color;
+          }
+        }
+
+        &:hover {
+          .group-hover\:text-#{$key}-#{$shade} {
+            color: $color;
+          }
+
+          .dark\:group-hover\:text-#{$key}-#{$shade} {
+            .dark & {
+              color: $color;
+            }
+          }
+
+          .group-hover\:bg-#{$key}-#{$shade} {
+            background-color: $color;
+          }
+
+          .dark\:group-hover\:bg-#{$key}-#{$shade} {
+            .dark & {
+              background-color: $color;
+            }
+          }
+        }
+      }
+    }
+
+    /*alpha values*/
+    @each $alpha in map-keys(map-get($palette, alpha)) {
+      $v: map-deep-get($palette, "alpha", $alpha);
+
+      .bg-#{$key}-#{$shade}\/#{$alpha} {
+        background-color: rgb($color, math.div($v, 10));
+      }
+
+      .dark\:bg-#{$key}-#{$shade}\/#{$alpha} {
+        .dark & {
+          background-color: rgb($color, math.div($v, 10));
+        }
+      }
+
+      .hover\:bg-#{$key}-#{$shade}\/#{$alpha} {
+        &:hover {
+          background-color: rgb($color, math.div($v, 10));
+        }
+      }
+
+      .dark\:hover\:bg-#{$key}-#{$shade}\/#{$alpha} {
+        .dark & {
+          &:hover {
+            background-color: rgb($color, math.div($v, 10));
+          }
+        }
+      }
+
+      .border-#{$key}-#{$shade}\/#{$alpha} {
+        border-color: rgb($color, math.div($v, 10));
+      }
+
+      .dark\:border-#{$key}-#{$shade}\/#{$alpha} {
+        .dark & {
+          border-color: rgb($color, math.div($v, 10));
+        }
+      }
+
+      .focus\:outline-#{$key}-#{$shade}\/#{$alpha} {
+        &:focus {
+          outline-color: rgb($color, math.div($v, 10))
+        }
+      }
+
+      .dark\:focus\:outline-#{$key}-#{$shade}\/#{$alpha} {
+        .dark & {
+          &:focus {
+            outline-color: rgb($color, math.div($v, 10))
+          }
+        }
+      }
+    }
+  }
+}
+
+.outline-none {
+  outline-width: 2px;
+  outline-style: solid;
+  outline-offset: 2px
+}
+
+.focus\:outline-none {
+  &:focus {
+    outline-width: 2px;
+    outline-style: solid;
+    outline-offset: 2px
+  }
+}

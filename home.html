@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AeonsCSS - Rapidly build modern websites without ever leaving your HTML.</title>
+  <link rel="stylesheet" href="./dist/styles/style.min.css">
+  <script src="./dist/scripts/script.min.js"></script>
+</head>
+
+<body class="antialiased text-slate-500 dark:text-slate-400 bg-white dark:bg-slate-900">
+  <div class="backdrop-bg hidden fixed inset-0 z-41" id="dialog-overlay"></div>
+  <div class="absolute z-20 top-0 inset-x-0 flex justify-center overflow-hidden pointer-events-none">
+    <div class="w-[108rem] flex-none flex justify-end">
+      <picture>
+        <source srcset="./dist/images/lightbg.webp" type="image/webp"><img src="./dist/images/lightbg.png" alt=""
+          class="w-[71.75rem] flex-none max-w-none dark:hidden" decoding="async">
+      </picture>
+      <picture>
+        <source srcset="./dist/images/darkbg.webp" type="image/webp"><img src="./dist/images/darkbg.png" alt=""
+          class="w-[90rem] flex-none max-w-none hidden dark:block" decoding="async">
+      </picture>
+    </div>
+  </div>
+  <div
+    class="sticky top-0 z-40 w-full backdrop-blur flex-none border-b-1 border-slate-50/10 dark:border-slate-900/10 supports-backdrop-blur:bg-white/60 dark:bg-transparent">
+    <div class="max-w-8xl mx-auto">
+      <div class="py-4 border-b-1 border-slate-900/10 lg:px-8 lg:border-0 dark:border-slate-300/10 mx-4 lg:mx-0">
+        <div class="relative flex items-center">
+          <a class="mr-3 w-8 overflow-hidden md:w-auto flex items-center" href="./"><svg class="w-8 h-8 text-sky block"
+              fill="currentColor" viewBox="0 0 24 24">
+              <use xlink:href="./dist/svgs/icon.svg#bx-checkbox-square" />
+            </svg><span
+              class="hidden md:block text-logo bold text-spacing text-black dark:text-white">aeonscss</span><span
+              class="sr-only">AeonsCSS home
+              page</span></a>
+          <div class="relative"><button
+              class="text-xs lh-5 medium bg-slate-400/10 rounded-lg py-1 px-3 flex items-center space-x-2 hover:bg-slate-400/20"
+              type="button" aria-haspopup="true" aria-expanded="false">v1.0.0
+              <svg class="w-3 h-6 ml-2 overflow-visible" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">
+                <use xlink:href="./dist/svgs/icon.svg#bxs-chevron-down" />
+              </svg></button></div>
+          <a class="ml-3 text-xs lh-5 bold text-sky-600 dark:text-sky-400 bg-sky-400/10 rounded-lg py-1 px-3 hidden xl:flex items-center hover:bg-sky-400/20"
+            href="/blog/aeonscss-v1-0"><strong class="bold">AeonsCSS v1.0</strong><svg fill="currentColor"
+              aria-hidden="true" class="w-1 h-2 ml-1 text-sky-600 dark:text-sky-400/70" viewBox="0 0 24 24">
+              <use xlink:href="./dist/svgs/icon.svg#bxs-circle" />
+            </svg><span class="ml-2 min-[1372px]:hidden">Dynamic breakpoints, container queries, and more</span><span
+              class="ml-2 hidden min-[1372px]:inline">Dynamic breakpoints, multi-config, container queries, and
+              more</span><svg class="w-3 h-6 ml-3 overflow-visible text-sky-300 dark:text-sky-400" fill="currentColor"
+              aria-hidden="true" viewBox="0 0 24 24">
+              <use xlink:href="./dist/svgs/icon.svg#bxs-chevron-right" />
+            </svg></a>
+          <div class="hidden lg:flex items-center ml-auto">
+            <nav class="text-sm lh-6 bold text-slate-700 dark:text-slate-200">
+              <ul class="flex flex-col md:flex-row space-x-8">
+                <li><a class="hover:text-sky-500 dark:hover:text-sky-400" href="#work">Recent
+                    Work</a>
+                </li>
+                <li><a class="hover:text-sky-500 dark:hover:text-sky-400" href="#about">What We
+                    Do</a>
+                </li>
+                <li><a class="hover:text-sky-500 dark:hover:text-sky-400" href="#about">Blogs</a>
+                </li>
+                <li><a class="hover:text-sky-500 dark:hover:text-sky-400" href="#about">Showcase
+                    <span
+                      class="text-sky-600 dark:text-sky-400 bg-sky-400/10 text-xs medium rounded-lg lh-5 ml-2 px-2 py-0.5">New</span></a>
+                </li>
+                <li class="md:hidden"><a class="hover:text-sky-500 dark:hover:text-sky-400"
+                    href="https://github.com/aeonslabs/aeonscss">Github</a>
+                </li>
+              </ul>
+            </nav>
+            <div
+              class="w-full flex items-center border-slate-50 dark:border-slate-800 border-t-1 md:border-t-0 border-l-0 md:border-l-1 pt-6 mt-6 md:pt-0 md:mt-0 pl-0 ml-0 md:pl-6 md:ml-6">
+              <button class="theme-toggle w-5 h-5 text-sky-500" id="theme-toggle" aria-title="Toggles light & dark"
+                aria-label="auto" aria-live="polite">
+                <span class="sr-only">Theme</span>
+                <span class="dark:hidden"><svg fill="currentColor" viewBox="0 0 24 24">
+                    <use xlink:href="./dist/svgs/icon.svg#bx-sun" />
+                  </svg></span>
+                <span class="hidden dark:inline"><svg fill="currentColor" viewBox="0 0 24 24">
+                    <use xlink:href="./dist/svgs/icon.svg#bx-moon" />
+                  </svg></span>
+              </button>
+              <a class="w-5 h-5 hidden md:inline-flex text-slate-400 hover:text-slate-500 dark:hover:text-slate-300 ml-6"
+                href="https://github.com/aeonslabs/aeonscss" aria-label="Aeons CSS on GitHub"><span
+                  class="sr-only">Aeons CSS on
+                  GitHub</span><svg viewBox="0 0 24 24" class="w-5 h-5" fill="currentColor">
+                  <use xlink:href="./dist/svgs/icon.svg#bxl-github" />
+                </svg></a>
+            </div>
+          </div>
+          <button class="lg:hidden text-slate-500 dark:text-slate-400 ml-auto relative z-42" id="burger"> <span
+              class="sr-only">Top-level navigation</span><svg viewBox="0 0 24 24" class="w-7 h-7" fill="currentColor">
+              <use xlink:href="./dist/svgs/icon.svg#bx-dots-vertical-rounded" />
+            </svg>
+          </button>
+        </div>
+      </div>
+      <div class="flex lg:hidden items-center p-4 border-b-1 border-slate-900/10 dark:border-slate-50/10">
+        <button type="button" class="text-slate-500 hover:text-slate-600 dark:text-slate-400 dark:hover:text-slate-300"
+          id="menu"><span class="sr-only">Navigation</span><svg viewBox="0 0 24 24" class="w-7 h-7" fill="currentColor">
+            <use xlink:href="./dist/svgs/icon.svg#bx-menu" />
+          </svg></button>
+        <ol class="ml-4 flex text-sm lh-6 whitespace-nowrap min-w-0">
+          <li class="flex items-center">Getting Started<svg aria-hidden="true"
+              class="mx-3 w-3 h-3 overflow-visible text-slate-400" viewBox="0 0 24 24" fill="currentColor">
+              <use xlink:href="./dist/svgs/icon.svg#bxs-chevron-right" />
+            </svg></li>
+          <li class="bold text-slate-900 ellipsis dark:text-slate-200">Installation: Play CDN</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+  <div class="overflow-hidden">
+    <div class="max-w-8xl mx-auto px-4 sm:px-6 md:px-8">
+      <div
+        class="bg-white dark:bg-slate-900 hidden lg:block fixed z-42 inset-0 top-18 left-[max(0px,calc(50%-45rem))] right-auto w-78 pb-10 px-8 overflow-y-auto -ml-8"
+        id="nav">
+        <button
+          class="absolute z-10 top-7 right-5 w-8 h-8 flex lg:hidden items-center justify-center text-slate-500 hover:text-slate-600 dark:text-slate-400 dark:hover:text-slate-300"
+          id="menu-close">
+          <span class="sr-only">Close navigation</span>
+          <svg aria-hidden="true" class="w-7 h-7 overflow-visible text-slate-400" viewBox="0 0 24 24"
+            fill="currentColor">
+            <use xlink:href="./dist/svgs/icon.svg#bx-x" />
+          </svg></button>
+        <nav class="text-md lg:text-sm lg:lh-6 relative">
+          <div class="sticky top-0">
+            <div class="bg-white dark:bg-slate-900 hidden lg:flex relative pt-10 pb-8">
+              <button type="button"
+                class="w-100 flex items-center text-sm lh-6 border-1 focus:outline-none border-slate-100 dark:border-slate-700 text-slate-400 rounded-xs py-2 px-3 dark:bg-slate-800 dark:hover:bg-slate-700">
+                <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-3">
+                  <use xlink:href="./dist/svgs/icon.svg#bx-search" />
+                </svg>Quick search...<span class="ml-auto pl-3 text-xs medium">⌘K</span></button>
+            </div>
+          </div>
+          <ul>
+            <li><a href="/docs/installation"
+                class="group flex items-center lg:lh-6 mb-4 bold text-sky-500 dark:text-sky-400">
+                <div
+                  class="mr-4 p-1 rounded-xs border-1 border-current dark:border-transparent text-sky-500 dark:text-sky-50 dark:group-hover:bg-sky-500 dark:bg-sky-500">
+                  <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
+                    <use xlink:href="./dist/svgs/icon.svg#bxs-book-open" />
+                  </svg>
+                </div>Documentation
+              </a></li>
+
+            <li><a href="https://aeonsui.com/components?ref=sidebar"
+                class="group flex items-center lg:lh-6 mb-4 medium text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300">
+                <div
+                  class="mr-4 p-1 rounded-xs border-1 border-slate-100 dark:border-slate-700 group:text-slate-500 dark:group-hover:text-indigo-50 dark:group-hover:bg-indigo-500 dark:bg-slate-800">
+                  <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
+                    <use xlink:href="./dist/svgs/icon.svg#bxs-cube" />
+                  </svg>
+                </div>Components
+              </a></li>
+            <li><a href="https://aeonsui.com/templates?ref=sidebar"
+                class="group flex items-center lg:lh-6 mb-4 medium text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300">
+                <div
+                  class="mr-4 p-1 rounded-xs border-1 border-slate-100 dark:border-slate-700 group:text-slate-500 dark:group-hover:text-fuchsia-50 group-hover:shadow-fuchsia-200 dark:group-hover:bg-fuchsia-600 dark:bg-slate-800">
+                  <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
+                    <use xlink:href="./dist/svgs/icon.svg#bxs-devices" />
+                  </svg>
+                </div>Templates
+              </a></li>
+            <li><a href="https://www.youtube.com/aeonslabs"
+                class="group flex items-center lg:lh-6 mb-4 medium text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300">
+                <div
+                  class="mr-4 p-1 rounded-xs border-1 border-slate-100 dark:border-slate-700 group:text-slate-500 dark:group-hover:text-pink-50 group-hover:shadow-pink-200 dark:group-hover:bg-pink-500 dark:bg-slate-800">
+                  <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
+                    <use xlink:href="./dist/svgs/icon.svg#bx-play-circle" />
+                  </svg>
+                </div>Screencasts
+              </a></li>
+            <li><a href="https://play.aeonscss.com"
+                class="group flex items-center lg:lh-6 mb-4 medium text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300">
+                <div
+                  class="mr-4 p-1 rounded-xs border-1 border-slate-100 dark:border-slate-700 group:text-slate-500 dark:group-hover:text-blue-50 group-hover:shadow-blue-200 dark:group-hover:bg-blue-500 dark:bg-slate-800">
+                  <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
+                    <use xlink:href="./dist/svgs/icon.svg#bx-code" />
+                  </svg>
+                </div>Playground
+              </a></li>
+            <li><a href="/resources"
+                class="group flex items-center lg:lh-6 mb-4 medium text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300">
+                <div
+                  class="mr-4 p-1 rounded-xs border-1 border-slate-100 dark:border-slate-700 group:text-slate-500 dark:group-hover:text-purple-50 group-hover:shadow-purple-200 dark:group-hover:bg-purple-400 dark:bg-slate-800">
+                  <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
+                    <use xlink:href="./dist/svgs/icon.svg#bxs-category-alt" />
+                  </svg>
+                </div><span class="">Resources</span>
+              </a></li>
+            <li><a href="https://github.com/aeonslabs/aeonscss/discussions"
+                class="group flex items-center lg:lh-6 mb-4 medium text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300">
+                <div
+                  class="mr-4 p-1 rounded-xs border-1 border-slate-100 dark:border-slate-700 group:text-slate-500 dark:group-hover:text-violet-50 group-hover:shadow-violet-200 dark:group-hover:bg-violet-500 dark:bg-slate-800">
+                  <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
+                    <use xlink:href="./dist/svgs/icon.svg#bxs-message-rounded-dots" />
+
+                  </svg>
+                </div>Community
+              </a></li>
+            <li><a href="https://jobs.aeonscss.com"
+                class="group flex items-center lg:lh-6 mb-8 medium text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300">
+                <div
+                  class="mr-4 p-1 rounded-xs border-1 border-slate-100 dark:border-slate-700 group:text-slate-500 dark:group-hover:text-sky-50 dark:group-hover:bg-sky-500 dark:bg-slate-800">
+                  <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
+                    <use xlink:href="./dist/svgs/icon.svg#bxs-briefcase" />
+
+                  </svg>
+                </div><span class="inline-flex items-baseline">Jobs</span>
+              </a></li>
+            <li class="mt-12 lg:mt-8">
+              <h5 class="mb-8 lg:mb-3 bold text-slate-900 dark:text-slate-200">Getting Started</h5>
+              <ul class="space-y-6 lg:space-y-2 border-l-1 border-slate-100 dark:border-slate-700">
+                <li><a class="block border-l-1 pl-4 -ml-px text-sky-500 border-current medium dark:text-sky-400"
+                    href="/docs/installation">Installation</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/editor-setup">Editor Setup</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/using-with-preprocessors">Using with Preprocessors</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/optimizing-for-production">Optimizing for Production</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/browser-support">Browser Support</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/upgrade-guide">Upgrade Guide</a></li>
+              </ul>
+            </li>
+            <li class="mt-12 lg:mt-8">
+              <h5 class="mb-8 lg:mb-3 medium text-slate-900 dark:text-slate-200">Core Concepts</h5>
+              <ul class="space-y-6 lg:space-y-2 border-l-1 border-slate-100 dark:border-slate-800">
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/utility-first">Utility-First Fundamentals</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/hover-focus-and-other-states">Hover, Focus, and Other States</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/responsive-design">Responsive Design</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/dark-mode">Dark Mode</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/reusing-styles">Reusing Styles</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/adding-custom-styles">Adding Custom Styles</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/functions-and-directives">Functions &amp; Directives</a></li>
+              </ul>
+            </li>
+            <li class="mt-12 lg:mt-8">
+              <h5 class="mb-8 lg:mb-3 medium text-slate-900 dark:text-slate-200">Customization</h5>
+              <ul class="space-y-6 lg:space-y-2 border-l-1 border-slate-100 dark:border-slate-800">
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/configuration">Configuration</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/content-configuration">Content</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/theme">Theme</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/screens">Screens</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/customizing-colors">Colors</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/customizing-spacing">Spacing</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/plugins">Plugins</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/presets">Presets</a></li>
+              </ul>
+            </li>
+            <li class="mt-12 lg:mt-8">
+              <h5 class="mb-8 lg:mb-3 medium text-slate-900 dark:text-slate-200">Base Styles</h5>
+              <ul class="space-y-6 lg:space-y-2 border-l-1 border-slate-100 dark:border-slate-800">
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/preflight">Preflight</a></li>
+              </ul>
+            </li>
+            <li class="mt-12 lg:mt-8">
+              <h5 class="mb-8 lg:mb-3 medium text-slate-900 dark:text-slate-200">Layout</h5>
+              <ul class="space-y-6 lg:space-y-2 border-l-1 border-slate-100 dark:border-slate-800">
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/aspect-ratio">Aspect Ratio</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/container">Container</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/columns">Columns</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/break-after">Break After</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/break-before">Break Before</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/break-inside">Break Inside</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/box-decoration-break">Box Decoration Break</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/box-sizing">Box Sizing</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/display">Display</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/float">Floats</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/clear">Clear</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/isolation">Isolation</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/object-fit">Object Fit</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/object-position">Object Position</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/overflow">Overflow</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/overscroll-behavior">Overscroll Behavior</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/position">Position</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/top-right-bottom-left">Top / Right / Bottom / Left</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/visibility">Visibility</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/z-index">Z-Index</a></li>
+              </ul>
+            </li>
+            <li class="mt-12 lg:mt-8">
+              <h5 class="mb-8 lg:mb-3 medium text-slate-900 dark:text-slate-200">Flexbox &amp; Grid</h5>
+              <ul class="space-y-6 lg:space-y-2 border-l-1 border-slate-100 dark:border-slate-800">
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/flex-basis">Flex Basis</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/flex-direction">Flex Direction</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/flex-wrap">Flex Wrap</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/flex">Flex</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/flex-grow">Flex Grow</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/flex-shrink">Flex Shrink</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/order">Order</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/grid-template-columns">Grid Template Columns</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/grid-column">Grid Column Start / End</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/grid-template-rows">Grid Template Rows</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/grid-row">Grid Row Start / End</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/grid-auto-flow">Grid Auto Flow</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/grid-auto-columns">Grid Auto Columns</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/grid-auto-rows">Grid Auto Rows</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/gap">Gap</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/justify-content">Justify Content</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/justify-items">Justify Items</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/justify-self">Justify Self</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/align-content">Align Content</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/align-items">Align Items</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/align-self">Align Self</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/place-content">Place Content</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/place-items">Place Items</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/place-self">Place Self</a></li>
+              </ul>
+            </li>
+            <li class="mt-12 lg:mt-8">
+              <h5 class="mb-8 lg:mb-3 medium text-slate-900 dark:text-slate-200">Spacing</h5>
+              <ul class="space-y-6 lg:space-y-2 border-l-1 border-slate-100 dark:border-slate-800">
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/padding">Padding</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/margin">Margin</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/space">Space Between</a></li>
+              </ul>
+            </li>
+            <li class="mt-12 lg:mt-8">
+              <h5 class="mb-8 lg:mb-3 medium text-slate-900 dark:text-slate-200">Sizing</h5>
+              <ul class="space-y-6 lg:space-y-2 border-l-1 border-slate-100 dark:border-slate-800">
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/width">Width</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/min-width">Min-Width</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/max-width">Max-Width</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/height">Height</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/min-height">Min-Height</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/max-height">Max-Height</a></li>
+              </ul>
+            </li>
+            <li class="mt-12 lg:mt-8">
+              <h5 class="mb-8 lg:mb-3 medium text-slate-900 dark:text-slate-200">Typography</h5>
+              <ul class="space-y-6 lg:space-y-2 border-l-1 border-slate-100 dark:border-slate-800">
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/family">Font Family</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/size">Font Size</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/smoothing">Font Smoothing</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/style">Font Style</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/weight">Font Weight</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/variant-numeric">Font Variant Numeric</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/letter-spacing">Letter Spacing</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/line-height">Line Height</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/list-style-type">List Style Type</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/list-style-position">List Style Position</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/text-align">Text Align</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/text-color">Text Color</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/text-decoration">Text Decoration</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/text-decoration-color">Text Decoration Color</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/text-decoration-style">Text Decoration Style</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/text-decoration-thickness">Text Decoration Thickness</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/text-underline-offset">Text Underline Offset</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/text-transform">Text Transform</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/text-overflow">Text Overflow</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/text-indent">Text Indent</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/vertical-align">Vertical Align</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/whitespace">Whitespace</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/word-break">Word Break</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/content">Content</a></li>
+              </ul>
+            </li>
+            <li class="mt-12 lg:mt-8">
+              <h5 class="mb-8 lg:mb-3 medium text-slate-900 dark:text-slate-200">Backgrounds</h5>
+              <ul class="space-y-6 lg:space-y-2 border-l-1 border-slate-100 dark:border-slate-800">
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/background-attachment">Background Attachment</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/background-clip">Background Clip</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/background-color">Background Color</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/background-origin">Background Origin</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/background-position">Background Position</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/background-repeat">Background Repeat</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/background-size">Background Size</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/background-image">Background Image</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/gradient-color-stops">Gradient Color Stops</a></li>
+              </ul>
+            </li>
+            <li class="mt-12 lg:mt-8">
+              <h5 class="mb-8 lg:mb-3 medium text-slate-900 dark:text-slate-200">Borders</h5>
+              <ul class="space-y-6 lg:space-y-2 border-l-1 border-slate-100 dark:border-slate-800">
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/border-radius">Border Radius</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/border-width">Border Width</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/border-color">Border Color</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/border-style">Border Style</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/divide-width">Divide Width</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/divide-color">Divide Color</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/divide-style">Divide Style</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/outline-width">Outline Width</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/outline-color">Outline Color</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/outline-style">Outline Style</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/outline-offset">Outline Offset</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/ring-width">Ring Width</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/ring-color">Ring Color</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/ring-offset-width">Ring Offset Width</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/ring-offset-color">Ring Offset Color</a></li>
+              </ul>
+            </li>
+            <li class="mt-12 lg:mt-8">
+              <h5 class="mb-8 lg:mb-3 medium text-slate-900 dark:text-slate-200">Effects</h5>
+              <ul class="space-y-6 lg:space-y-2 border-l-1 border-slate-100 dark:border-slate-800">
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/box-shadow">Box Shadow</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/box-shadow-color">Box Shadow Color</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/opacity">Opacity</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/mix-blend-mode">Mix Blend Mode</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/background-blend-mode">Background Blend Mode</a></li>
+              </ul>
+            </li>
+            <li class="mt-12 lg:mt-8">
+              <h5 class="mb-8 lg:mb-3 medium text-slate-900 dark:text-slate-200">Filters</h5>
+              <ul class="space-y-6 lg:space-y-2 border-l-1 border-slate-100 dark:border-slate-800">
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/blur">Blur</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/brightness">Brightness</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/contrast">Contrast</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/drop-shadow">Drop Shadow</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/grayscale">Grayscale</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/hue-rotate">Hue Rotate</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/invert">Invert</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/saturate">Saturate</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/sepia">Sepia</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/backdrop-blur">Backdrop Blur</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/backdrop-brightness">Backdrop Brightness</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/backdrop-contrast">Backdrop Contrast</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/backdrop-grayscale">Backdrop Grayscale</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/backdrop-hue-rotate">Backdrop Hue Rotate</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/backdrop-invert">Backdrop Invert</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/backdrop-opacity">Backdrop Opacity</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/backdrop-saturate">Backdrop Saturate</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/backdrop-sepia">Backdrop Sepia</a></li>
+              </ul>
+            </li>
+            <li class="mt-12 lg:mt-8">
+              <h5 class="mb-8 lg:mb-3 medium text-slate-900 dark:text-slate-200">Tables</h5>
+              <ul class="space-y-6 lg:space-y-2 border-l-1 border-slate-100 dark:border-slate-800">
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/border-collapse">Border Collapse</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/border-spacing">Border Spacing</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/table-layout">Table Layout</a></li>
+              </ul>
+            </li>
+            <li class="mt-12 lg:mt-8">
+              <h5 class="mb-8 lg:mb-3 medium text-slate-900 dark:text-slate-200">Transitions &amp; Animation</h5>
+              <ul class="space-y-6 lg:space-y-2 border-l-1 border-slate-100 dark:border-slate-800">
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/transition-property">Transition Property</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/transition-duration">Transition Duration</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/transition-timing-function">Transition Timing Function</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/transition-delay">Transition Delay</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/animation">Animation</a></li>
+              </ul>
+            </li>
+            <li class="mt-12 lg:mt-8">
+              <h5 class="mb-8 lg:mb-3 medium text-slate-900 dark:text-slate-200">Transforms</h5>
+              <ul class="space-y-6 lg:space-y-2 border-l-1 border-slate-100 dark:border-slate-800">
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/scale">Scale</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/rotate">Rotate</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/translate">Translate</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/skew">Skew</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/transform-origin">Transform Origin</a></li>
+              </ul>
+            </li>
+            <li class="mt-12 lg:mt-8">
+              <h5 class="mb-8 lg:mb-3 medium text-slate-900 dark:text-slate-200">Interactivity</h5>
+              <ul class="space-y-6 lg:space-y-2 border-l-1 border-slate-100 dark:border-slate-800">
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/accent-color">Accent Color</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/appearance">Appearance</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/cursor">Cursor</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/caret-color">Caret Color</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/pointer-events">Pointer Events</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/resize">Resize</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/scroll-behavior">Scroll Behavior</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/scroll-margin">Scroll Margin</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/scroll-padding">Scroll Padding</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/scroll-snap-align">Scroll Snap Align</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/scroll-snap-stop">Scroll Snap Stop</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/scroll-snap-type">Scroll Snap Type</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/touch-action">Touch Action</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/user-select">User Select</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/will-change">Will Change</a></li>
+              </ul>
+            </li>
+            <li class="mt-12 lg:mt-8">
+              <h5 class="mb-8 lg:mb-3 medium text-slate-900 dark:text-slate-200">SVG</h5>
+              <ul class="space-y-6 lg:space-y-2 border-l-1 border-slate-100 dark:border-slate-800">
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/fill">Fill</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/stroke">Stroke</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/stroke-width">Stroke Width</a></li>
+              </ul>
+            </li>
+            <li class="mt-12 lg:mt-8">
+              <h5 class="mb-8 lg:mb-3 medium text-slate-900 dark:text-slate-200">Accessibility</h5>
+              <ul class="space-y-6 lg:space-y-2 border-l-1 border-slate-100 dark:border-slate-800">
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/screen-readers">Screen Readers</a></li>
+              </ul>
+            </li>
+            <li class="mt-12 lg:mt-8">
+              <h5 class="mb-8 lg:mb-3 medium text-slate-900 dark:text-slate-200">Official Plugins</h5>
+              <ul class="space-y-6 lg:space-y-2 border-l-1 border-slate-100 dark:border-slate-800">
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="/docs/typography-plugin">Typography</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="https://github.com/aeonslabs/aeonscss-forms">Forms</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="https://github.com/aeonslabs/aeonscss-aspect-ratio">Aspect Ratio</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="https://github.com/aeonslabs/aeonscss-line-clamp">Line Clamp</a></li>
+                <li><a
+                    class="block border-l-1 pl-4 -ml-px border-transparent hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-300"
+                    href="https://github.com/aeonslabs/aeonscss-container-queries">Container Queries</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <div class="lg:pl-78">
+        <main class="max-w-3xl mx-auto relative z-20 pt-10 xl:max-w-none">
+          <div class="mb-10 md:flex md:items-start">
+            <div class="max-w-4xl flex-auto">
+              <p class="mb-4 text-sm lh-6 bold text-sky-500 dark:text-sky-400">Installation</p>
+              <h1 class="text-xl sm:text-2xl heavy text-slate-900 text-spacing sm:lh-4 lh-10 dark:text-slate-200">Get
+                started with AeonsCSS</h1>
+              <div class="mt-4 space-y-4">
+                <p class="text-lg text-slate-700 dark:text-slate-400">Aeons CSS works by scanning all of your HTML
+                  files, JavaScript components, and any other templates for class names, generating the corresponding
+                  styles and then writing them to a static CSS file.</p>
+                <p class="text-lg text-slate-700 dark:text-slate-400">It's fast, flexible, and reliable — with
+                  zero-runtime.</p>
+              </div>
+            </div>
+          </div>
+          <section class="mb-12 relative">
+            <div class="relative z-10">
+              <h2 class="text-slate-900 text-lg text-spacing bold mb-3 dark:text-slate-200">Installation</h2>
+              <div class="flex overflow-auto mb-6 -mx-4 sm:-mx-6">
+                <div class="flex-none min-w-full px-4 sm:px-6">
+                  <ul class="border-b-1 border-slate-100 space-x-6 flex whitespace-nowrap dark:border-slate-200/5">
+                    <li>
+                      <h2><a class="flex text-sm lh-6 medium pt-3 pb-3 border-b-2 -mb-px text-sky-500 border-current"
+                          href="/docs/installation">Aeons CLI</a></h2>
+                    </li>
+                    <li>
+                      <h2><a
+                          class="flex text-sm lh-6 medium pt-3 pb-3 border-b-2 -mb-px text-slate-900 border-transparent hover:border-slate-300 dark:text-slate-200 dark:hover:border-slate-700"
+                          href="/docs/installation/using-postcss">Using PostCSS</a></h2>
+                    </li>
+                    <li>
+                      <h2><a
+                          class="flex text-sm lh-6 medium pt-3 pb-3 border-b-2 -mb-px text-slate-900 border-transparent hover:border-slate-300 dark:text-slate-200 dark:hover:border-slate-700"
+                          href="/docs/installation/framework-guides">Framework Guides</a></h2>
+                    </li>
+                    <li>
+                      <h2><a
+                          class="flex text-sm lh-6 medium pt-3 pb-3 border-b-2 -mb-px text-slate-900 border-transparent hover:border-slate-300 dark:text-slate-200 dark:hover:border-slate-700"
+                          href="/docs/installation/play-cdn">Play CDN</a></h2>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </section>
+        </main>
+        <footer class="text-sm lh-6 mt-16">
+          <div
+            class="pt-10 pb-28 border-t-1 border-slate-100 sm:flex justify-between text-slate-500 dark:border-slate-200/5">
+            <div class="mb-6 sm:mb-0 sm:flex items-center">
+              <p>Copyright &copy; 2022 Aeons Labs Inc.</p>
+              <p class="sm:ml-4 sm:pl-4 sm:border-l-1 border-slate-200 dark:border-slate-200/5"><a
+                  class="hover:text-slate-900 dark:hover:text-slate-400" href="/brand">Trademark Policy</a></p>
+            </div>
+            <div class="flex space-x-10 text-slate-400 dark:text-slate-500"><a
+                href="https://github.com/aeonslabs/aeonscss"
+                class="hover:text-slate-500 dark:hover:text-slate-400"><span class="sr-only">GitHub</span><svg
+                  class="w-10 h-10 md:w-8 md:h-8" fill="currentColor" viewBox="0 0 24 24">
+                  <use xlink:href="./dist/svgs/icon.svg#bxl-github" />
+                </svg></a><a href="/discord" class="hover:text-slate-500 dark:hover:text-slate-400"><span
+                  class="sr-only">Discord</span>
+                <svg class="w-10 h-10 md:w-8 md:h-8" fill="currentColor" viewBox="0 0 24 24">
+                  <use xlink:href="./dist/svgs/icon.svg#bxl-discord" />
+                </svg></a></div>
+          </div>
+        </footer>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

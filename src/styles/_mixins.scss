@@ -1,0 +1,115 @@
+@use "sass:list";
+@use "sass:math";
+
+@mixin font-face($name, $path, $weight: null, $style: null, $exts: eot woff2 woff ttf svg) {
+  $src: null;
+
+  $extmods: (eot: "?",
+    svg: "#" + str-replace($name, " ", "_"));
+
+  $formats: (otf: "opentype",
+    ttf: "truetype"
+  );
+
+  @each $ext in $exts {
+    $extmod: if(map-has-key($extmods, $ext), $ext + map-get($extmods, $ext), $ext);
+    $format: if(map-has-key($formats, $ext), map-get($formats, $ext), $ext);
+    $src: append($src, url(quote($path + "." + $extmod)) format(quote($format)),
+    comma);
+  }
+
+  @font-face {
+    font-family: quote($name);
+    font-style: $style;
+    font-weight: $weight;
+    src: $src;
+  }
+}
+
+@mixin truncate($numLines: 1) {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+
+  @supports (-webkit-line-clamp: $numLines) {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: initial;
+    display: -webkit-box;
+    -webkit-line-clamp: $numLines;
+    -webkit-box-orient: vertical;
+  }
+}
+
+@mixin placeholder {
+  &.placeholder {
+    @content;
+  }
+
+  &:-moz-placeholder {
+    @content;
+  }
+
+  &::-moz-placeholder {
+    @content;
+  }
+
+  &:-ms-input-placeholder {
+    @content;
+  }
+
+  &::-webkit-input-placeholder {
+    @content;
+  }
+}
+
+@mixin position($position: absolute, $top: null, $right: null, $bottom: null, $left: null, $z-index: initial) {
+  position: $position;
+  top: $top;
+  right: $right;
+  bottom: $bottom;
+  left: $left;
+  z-index: $z-index;
+}
+
+@mixin pseudo($display: block, $pos: absolute, $content: '') {
+  content: $content;
+  display: $display;
+  position: $pos;
+}
+
+@mixin responsive-ratio($x, $y, $pseudo: false) {
+  $padding: unquote(math.div($y, $x ) * 100 + '%');
+
+  @if $pseudo {
+    &:before {
+      @include pseudo($pos: relative);
+      width: 100%;
+      padding-top: $padding;
+    }
+  }
+
+  @else {
+    padding-top: $padding;
+  }
+}
+
+@mixin aspect-ratio($x, $y, $pseudo: false) {
+  aspect-ratio: list.slash($x, $y);
+}
+
+@mixin keyframes($name) {
+  @-webkit-keyframes #{$name} {
+    @content;
+  }
+
+  @-moz-keyframes #{$name} {
+    @content;
+  }
+
+  @keyframes #{$name} {
+    @content;
+  }
+}
+
+// @debug list.slash(span math.div(6, 2), 7); //grid column span

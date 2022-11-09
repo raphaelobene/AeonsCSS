@@ -1,0 +1,372 @@
+@use "sass:math";
+
+// generate utility classes
+.text-spacing {
+  letter-spacing: -.025em;
+}
+
+//relative position z-index
+@each $val in $z-indexes {
+  .z-#{$val} {
+    z-index: z(#{$val});
+  }
+}
+
+@import 'spacing';
+
+.min-w-0 {
+  min-width: 0
+}
+
+.min-w-full {
+  min-width: 100%
+}
+
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.ml-auto {
+  margin-left: auto;
+}
+
+.mr-auto {
+  margin-right: auto;
+}
+
+.-ml-px {
+  margin-left: -1px;
+}
+
+.-mb-px {
+  margin-bottom: -1px;
+}
+
+.-mr-px {
+  margin-right: -1px;
+}
+
+.max-w-100-3 {
+  max-width: calc(100% - 3rem);
+}
+
+.left-auto {
+  left: auto;
+}
+
+.right-auto {
+  right: auto;
+}
+
+.left-\[max\(0px\2c calc\(50\%-45rem\)\)\],
+.right-\[max\(0px\2c calc\(50\%-45rem\)\)\] {
+  --max: max(0, 50% - 45rem);
+}
+
+.left-\[max\(0px\2c calc\(50\%-45rem\)\)\] {
+  left: var(--max);
+}
+
+.right-\[max\(0px\2c calc\(50\%-45rem\)\)\] {
+  right: var(--max);
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.w-full {
+  width: 100%;
+
+  @include mq(md) {
+    width: auto;
+  }
+}
+
+@each $name,
+$value in $breakpoints {
+
+  // if xs value = 0, set it global without media queries
+  @if($value ==0) {
+    .w-auto {
+      width: auto;
+    }
+  }
+
+  @else {
+    @media screen and (min-width: $value) {
+      .#{$name}\:w-auto {
+        width: auto;
+      }
+    }
+  }
+}
+
+.ellipsis {
+  @include truncate();
+}
+
+@each $val in $line-clamp {
+  .line-clamp-#{$val} {
+    @include truncate($val);
+  }
+}
+
+@include mq(md) {
+  .md\:line-clamp-none {
+    -webkit-line-clamp: unset;
+  }
+}
+
+@each $property,
+$map in $utilities {
+  $prefix: map-get($map, "prefix");
+  $values: map-get($map, "values");
+
+  @each $k,
+  $v in $values {
+
+    @if($property =="font-size") {
+
+      @each $name,
+      $value in $breakpoints {
+
+        // if xs value = 0, set it global without media queries
+        @if($value ==0) {
+          .#{$prefix}-#{$k} {
+            #{$property}: $v;
+          }
+        }
+
+        @else {
+          @media screen and (min-width: $value) {
+            .#{$name}\:#{$prefix}-#{$k} {
+              #{$property}: $v !important;
+            }
+          }
+        }
+      }
+    }
+
+    @else if($prefix !="display") {
+      @if($k =="default") {
+        .#{$prefix} {
+          #{$property}: $v;
+        }
+      }
+
+      @else {
+        .#{$prefix}-#{$k} {
+          #{$property}: $v;
+        }
+      }
+    }
+
+    @else {
+      @include media(1372) {
+        .min-\[1372px\]\:#{$k} {
+          #{$property}: $v;
+        }
+      }
+
+      @each $name,
+      $value in $breakpoints {
+
+        // if xs value = 0, set it global without media queries
+        @if($value ==0) {
+          .#{$k} {
+            #{$property}: $v;
+          }
+
+          .dark\:#{$k} {
+            .dark & {
+              #{$property}: $v;
+            }
+          }
+        }
+
+        @else {
+          @media screen and (min-width: $value) {
+            .#{$name}\:#{$k} {
+              #{$property}: $v !important;
+            }
+
+            .dark\:#{$name}\:#{$k} {
+              .dark & {
+                #{$property}: $v !important;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@each $key,
+$value in $font-weight {
+  .#{$key} {
+    font-weight: $value;
+  }
+}
+
+@each $key,
+$value in $text-transform {
+  .#{$key} {
+    text-transform: $value;
+  }
+}
+
+@each $val in $position {
+  .#{$val} {
+    position: $val;
+  }
+}
+
+@each $val in $overflow {
+  .overflow-#{$val} {
+    overflow: $val;
+  }
+
+  .overflow-x-#{$val} {
+    overflow-x: $val;
+  }
+
+  .overflow-y-#{$val} {
+    overflow-y: $val;
+  }
+}
+
+@each $val in $style {
+  .border-#{$val} {
+    border-style: $val;
+  }
+
+  .outline-#{$val} {
+    outline-style: $val;
+
+    &:focus {
+      outline-style: $val;
+    }
+  }
+}
+
+// max-width classes
+.container {
+  width: 100%;
+
+  &--fluid {
+    max-width: 100%;
+  }
+
+  &--row {
+    width: 100%;
+  }
+
+  @each $key,
+  $val in $breakpoints {
+    @if($val !=0) {
+      @media screen and (min-width: $val) {
+        max-width: $val;
+      }
+    }
+  }
+}
+
+@each $key,
+$val in $aspect-ratio {
+  $x: map-get($val, "x");
+  $y: map-get($val, "y");
+
+  .aspect-#{$key} {
+    @include aspect-ratio($x, $y);
+  }
+}
+
+.max-w-full {
+  max-width: 100%;
+}
+
+@each $key,
+$val in $max-width {
+  @if($val !=none) {
+
+    @each $name,
+    $value in $breakpoints {
+
+      // if xs value = 0, set it global without media queries
+      @if($value ==0) {
+        .max-w-#{$key} {
+          max-width: $val;
+        }
+      }
+
+      @else {
+        .#{$name}\:max-w-#{$key} {
+          max-width: $val;
+        }
+      }
+    }
+  }
+
+  @else {
+
+    @each $name,
+    $value in $breakpoints {
+
+      // if xs value = 0, set it global without media queries
+      @if($value ==0) {
+        .max-w-none {
+          max-width: $val;
+        }
+      }
+
+      @else {
+        .#{$name}\:max-w-none {
+          max-width: $val !important;
+        }
+      }
+    }
+  }
+}
+
+// backdrops
+@each $key,
+$val in $backdrops {
+  .#{$key} {
+    @supports ((-webkit-backdrop-filter:blur(0)) or (backdrop-filter:blur(0))) or (-webkit-backdrop-filter:blur(0)) {
+      backdrop-filter: $val;
+    }
+  }
+}
+
+@each $key,
+$val in $filter {
+  @if($key =="default") {
+    @at-root {
+      :root {
+        --backdrop-blur: #{$val};
+        --blur: #{$val};
+      }
+    }
+
+    .backdrop-blur {
+      backdrop-filter: var(--backdrop-blur);
+    }
+
+    .blur {
+      filter: var(--blur);
+    }
+  }
+
+  @else {
+    .backdrop-blur-#{$key} {
+      --backdrop-blur: #{$val};
+    }
+
+    .blur-#{$key} {
+      --blur: #{$val};
+    }
+  }
+}

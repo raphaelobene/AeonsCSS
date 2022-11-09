@@ -1,0 +1,497 @@
+@use "sass:math";
+
+$spacing: 100;
+$base-border: 1;
+$default: .25;
+
+$prefixes: (
+  g: gap,
+  gx: column-gap,
+  gy: row-gap,
+  p: padding,
+  pt: padding-top,
+  pr: padding-right,
+  pb: padding-bottom,
+  pl: padding-left,
+  px: (padding-left, padding-right),
+  py: (padding-top, padding-bottom),
+  m: margin,
+  mt: margin-top,
+  mr: margin-right,
+  mb: margin-bottom,
+  ml: margin-left,
+  mx: (margin-left, margin-right),
+  my: (margin-top, margin-bottom),
+  ) !default;
+
+$borders: (
+  border: border,
+  t: border-top,
+  r: border-right,
+  b: border-bottom,
+  l: border-left,
+  x: (border-left, border-right),
+  y: (border-top, border-bottom),
+  ) !default;
+
+
+@each $name,
+$value in $breakpoints {
+
+  // if xs value = 0, set it global without media queries
+  @if($value ==0) {
+
+    @each $attr-short,
+    $attr-long in $prefixes {
+      @for $i from 0 through $spacing {
+        @if $i ==1 {
+          .#{$attr-short}-0\.5 {
+            @each $val in $attr-long {
+              #{$val}: #{math.div($default, 2)}rem;
+            }
+          }
+        }
+
+        @if($attr-short =='gx') {
+          .#{$attr-short}-#{$i} {
+            @each $val in $attr-long {
+              #{$val}: #{$i * $default}rem;
+            }
+          }
+        }
+
+        @if($attr-short =='gy') {
+          .#{$attr-short}-#{$i} {
+            @each $val in $attr-long {
+              #{$val}: #{$i * $default}rem;
+            }
+          }
+        }
+
+        @if($attr-short =='px') {
+          .#{$attr-short}-#{$i} {
+            @each $val in $attr-long {
+              #{$val}: #{$i * $default}rem;
+            }
+          }
+        }
+
+        @else if ($attr-short =='py') {
+          .#{$attr-short}-#{$i} {
+            @each $val in $attr-long {
+              #{$val}: #{$i * $default}rem;
+            }
+          }
+        }
+
+        @else if ($attr-short =='mx') {
+          .#{$attr-short}-#{$i} {
+            @each $val in $attr-long {
+              #{$val}: #{$i * $default}rem;
+            }
+          }
+
+          .-#{$attr-short}-#{$i} {
+            @each $val in $attr-long {
+              #{$val}: -#{$i * $default}rem;
+            }
+          }
+
+          .space-x-#{$i} {
+            &>* {
+              &:not(:first-child) {
+                @each $val in $attr-long {
+                  @if $val =="margin-right" {
+                    #{$val}: #{($i * $default) * 0}rem;
+                  }
+
+                  @else {
+                    #{$val}: #{$i * $default}rem;
+                  }
+                }
+              }
+            }
+          }
+        }
+
+        @else if ($attr-short =='my') {
+          .#{$attr-short}-#{$i} {
+            @each $val in $attr-long {
+              #{$val}: #{$i * $default}rem;
+            }
+          }
+
+          .-#{$attr-short}-#{$i} {
+            @each $val in $attr-long {
+              #{$val}: -#{$i * $default}rem;
+            }
+          }
+
+          .space-y-#{$i} {
+            &>* {
+              &:not(:first-child) {
+                @each $val in $attr-long {
+                  @if $val =="margin-bottom" {
+                    #{$val}: #{($i * $default)*0}rem;
+                  }
+
+                  @else {
+                    #{$val}: #{$i * $default}rem;
+                  }
+                }
+              }
+            }
+          }
+        }
+
+        @else {
+          .#{$attr-short}-#{$i} {
+            #{$attr-long}: #{$i * $default}rem;
+          }
+
+          .-#{$attr-short}-#{$i} {
+            #{$attr-long}: -#{$i * $default}rem;
+          }
+
+          @if $attr-short !="g" {
+            .group-#{$attr-short}-#{$i}>* {
+              #{$attr-long}: #{$i * $default}rem;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // breakpoint values that not equal to 0
+  @else {
+    @media screen and (min-width: $value) {
+
+      @each $attr-short,
+      $attr-long in $prefixes {
+        @for $i from 0 through $spacing {
+          @if $i ==1 {
+            .#{$name}\:#{$attr-short}-0\.5 {
+              @each $val in $attr-long {
+                #{$val}: #{math.div($default, 2)}rem;
+              }
+            }
+          }
+
+          @if($attr-short =='gx') {
+            .#{$name}\:#{$attr-short}-#{$i} {
+              @each $val in $attr-long {
+                #{$val}: #{$i * $default}rem;
+              }
+            }
+          }
+
+          @else if ($attr-short =='gy') {
+            .#{$name}\:#{$attr-short}-#{$i} {
+              @each $val in $attr-long {
+                #{$val}: #{$i * $default}rem;
+              }
+            }
+          }
+
+          @else if ($attr-short =='px') {
+            .#{$name}\:#{$attr-short}-#{$i} {
+              @each $val in $attr-long {
+                #{$val}: #{$i * $default}rem;
+              }
+            }
+          }
+
+          @else if ($attr-short =='py') {
+            .#{$name}\:#{$attr-short}-#{$i} {
+              @each $val in $attr-long {
+                #{$val}: #{$i * $default}rem;
+              }
+            }
+          }
+
+          @else if ($attr-short =='mx') {
+            .#{$name}\:#{$attr-short}-#{$i} {
+              @each $val in $attr-long {
+                #{$val}: #{$i * $default}rem !important;
+              }
+            }
+
+            .#{$name}\:-#{$attr-short}-#{$i} {
+              @each $val in $attr-long {
+                #{$val}: -#{$i * $default}rem !important;
+              }
+            }
+
+            .#{$name}\:space-x-#{$i} {
+              &>* {
+                &:not(:first-child) {
+                  @each $val in $attr-long {
+                    @if $val =="margin-right" {
+                      #{$val}: #{($i * $default)*0}rem;
+                    }
+
+                    @else {
+                      #{$val}: #{$i * $default}rem;
+                    }
+                  }
+                }
+              }
+            }
+          }
+
+          @else if ($attr-short =='my') {
+            .#{$name}\:#{$attr-short}-#{$i} {
+              @each $val in $attr-long {
+                #{$val}: #{$i * $default}rem;
+              }
+            }
+
+            .#{$name}\:-#{$attr-short}-#{$i} {
+              @each $val in $attr-long {
+                #{$val}: -#{$i * $default}rem;
+              }
+            }
+
+            .#{$name}\:space-y-#{$i} {
+              &>* {
+                &:not(:first-child) {
+                  @each $val in $attr-long {
+                    @if $val =="margin-bottom" {
+                      #{$val}: #{($i * $default)*0}rem;
+                    }
+
+                    @else {
+                      #{$val}: #{$i * $default}rem;
+                    }
+                  }
+                }
+              }
+            }
+          }
+
+          @else {
+            .#{$name}\:#{$attr-short}-#{$i} {
+              #{$attr-long}: #{$i * $default}rem;
+            }
+
+            .#{$name}\:-#{$attr-short}-#{$i} {
+              #{$attr-long}: -#{$i * $default}rem;
+            }
+
+            @if $attr-short !="g" {
+              .#{$name}\:group-#{$attr-short}-#{$i}>* {
+                #{$attr-long}: #{$i * $default}rem;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+
+@each $key,
+$value in $borders {
+
+  @each $name,
+  $bp in $breakpoints {
+
+    // if xs value != 0, set it global without media queries
+    @if($bp !=0) {
+      @media screen and (min-width: $bp) {
+        @for $i from 0 through 8 {
+          @if($key !='border') {
+            .#{$name}\:border-#{$key}-#{$i} {
+              @each $val in $value {
+                #{$val}-width: #{math.div($i, $base-border)}px;
+              }
+            }
+          }
+
+          @else {
+            .#{$name}\:#{$value}-#{$i} {
+              #{$value}-width: #{math.div($i, $base-border)}px;
+            }
+          }
+        }
+      }
+    }
+
+    @else {
+      @for $i from 0 through 8 {
+
+        @if($key !='border') {
+          .border-#{$key}-#{$i} {
+            @each $val in $value {
+              #{$val}-width: #{math.div($i, $base-border)}px;
+            }
+          }
+        }
+
+        @else {
+          .#{$value}-#{$i} {
+            #{$value}-width: #{math.div($i, $base-border)}px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.w-\[#{$default * 432}rem\] {
+  width: #{$default * 432}rem;
+}
+
+.w-\[71\.75rem\] {
+  width: #{$default * 287}rem;
+}
+
+.w-\[#{$default * 360}rem\] {
+  width: #{$default * 360}rem;
+}
+
+@for $i from 0 through $spacing {
+
+  @each $name,
+  $value in $breakpoints {
+
+    // if xs value = 0, set it global without media queries
+    @if($value ==0) {
+      .w-#{$i} {
+        width: #{$i * $default}rem;
+      }
+
+      .h-#{$i} {
+        height: #{$i * $default}rem;
+      }
+
+      .lh-#{$i} {
+        line-height: #{$i * $default}rem;
+      }
+    }
+
+    @else {
+      @media screen and (min-width: $value) {
+        .#{$name}\:w-#{$i} {
+          width: #{$i * $default}rem !important;
+        }
+
+        .#{$name}\:h-#{$i} {
+          height: #{$i * $default}rem !important;
+        }
+
+        .#{$name}\:lh-#{$i} {
+          line-height: #{$i * $default} !important;
+        }
+      }
+    }
+  }
+
+  @if $i ==0 {
+    .inset-#{$i} {
+      inset: #{$i * $default}rem;
+    }
+
+    .inset-x-#{$i} {
+      left: #{$i * $default}rem;
+      right: #{$i * $default}rem;
+    }
+
+    .inset-y-#{$i} {
+      top: #{$i * $default}rem;
+      bottom: #{$i * $default}rem;
+    }
+
+    .top-#{$i} {
+      top: #{$i * $default}rem;
+    }
+
+    .left-#{$i} {
+      left: #{$i * $default}rem;
+    }
+
+    .right-#{$i} {
+      right: #{$i * $default}rem;
+    }
+
+    .bottom-#{$i} {
+      bottom: #{$i * $default}rem;
+    }
+
+    .z-#{$i} {
+      z-index: $i;
+    }
+  }
+
+  @else {
+    .inset-#{$i} {
+      inset: #{$i * $default}rem;
+    }
+
+    .inset-x-#{$i} {
+      left: #{$i * $default}rem;
+      right: #{$i * $default}rem;
+    }
+
+    .inset-y-#{$i} {
+      top: #{$i * $default}rem;
+      bottom: #{$i * $default}rem;
+    }
+
+    .top-#{$i} {
+      top: #{$i * $default}rem;
+    }
+
+    .left-#{$i} {
+      left: #{$i * $default}rem;
+    }
+
+    .right-#{$i} {
+      right: #{$i * $default}rem;
+    }
+
+    .bottom-#{$i} {
+      bottom: #{$i * $default}rem;
+    }
+
+    .-inset-#{$i} {
+      inset: -#{$i * $default}rem;
+    }
+
+    .-inset-x-#{$i} {
+      left: -#{$i * $default}rem;
+      right: -#{$i * $default}rem;
+    }
+
+    .-inset-y-#{$i} {
+      top: -#{$i * $default}rem;
+      bottom: -#{$i * $default}rem;
+    }
+
+    .-top-#{$i} {
+      top: -#{$i * $default}rem;
+    }
+
+    .-left-#{$i} {
+      left: -#{$i * $default}rem;
+    }
+
+    .-right-#{$i} {
+      right: -#{$i * $default}rem;
+    }
+
+    .-bottom-#{$i} {
+      bottom: -#{$i * $default}rem;
+    }
+
+    .z-#{$i} {
+      z-index: $i;
+    }
+
+    .-z-#{$i} {
+      z-index: -$i;
+    }
+  }
+}

@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AeonsCSS - Rapidly build modern websites without ever leaving your HTML.</title>
+  <link rel="stylesheet" href="./dist/styles/style.min.css">
+  <script src="./dist/scripts/script.min.js"></script>
+</head>
+
+<body class="antialiased text-slate-500 dark:text-slate-400 bg-white dark:bg-slate-900">
+  <div class="backdrop-bg hidden fixed inset-0 z-21" id="dialog-overlay"></div>
+  <div class="mb-12 sm:mb-18 md:mb-26">
+    <header class="relative pb-12 sm:pb-18 md:pb-26">
+      <div
+        class="bg-position bg-grid-slate border-b-1 border-slate-50 dark:border-slate-800 mask-image-linear-gradient-to-bottom absolute inset-0">
+      </div>
+      <div class="relative md:px-8 sm:px-6 px-4">
+        <!-- navbar -->
+        <div
+          class="relative flex items-center justify-between text-slate-700 dark:text-slate-200 text-sm bold lh-6 pt-6 lg:pt-8">
+          <div class="w-8 overflow-hidden md:w-auto flex items-center"><svg class="w-8 h-8 text-sky block"
+              fill="currentColor" viewBox="0 0 24 24">
+              <use xlink:href="./dist/svgs/icon.svg#bx-checkbox-square" />
+            </svg><span
+              class="hidden md:block text-logo bold text-spacing text-black dark:text-white">aeonscss</span><span
+              class="sr-only">AeonsCSS home
+              page</span></div>
+          <div class="hidden md:flex items-center">
+            <nav>
+              <ul class="flex flex-col md:flex-row space-x-8">
+                <li><a class="hover:text-sky-500 dark:hover:text-sky-400" href="#work">Recent
+                    Work</a>
+                </li>
+                <li><a class="hover:text-sky-500 dark:hover:text-sky-400" href="#about">What We
+                    Do</a>
+                </li>
+                <li><a class="hover:text-sky-500 dark:hover:text-sky-400" href="#about">Blogs</a>
+                </li>
+                <li><a class="hover:text-sky-500 dark:hover:text-sky-400" href="#about">Showcase
+                    <span
+                      class="text-sky-600 dark:text-sky-400 bg-sky-400/10 text-xs medium rounded-lg lh-5 ml-2 px-2 py-0.5">New</span></a>
+                </li>
+                <li class="md:hidden"><a class="hover:text-sky-500 dark:hover:text-sky-400"
+                    href="https://github.com/aeonslabs/aeonscss">Github</a>
+                </li>
+              </ul>
+            </nav>
+            <div
+              class="w-full flex items-center border-slate-50 dark:border-slate-800 border-t-1 md:border-t-0 border-l-0 md:border-l-1 pt-6 mt-6 md:pt-0 md:mt-0 pl-0 ml-0 md:pl-6 md:ml-6">
+              <button class="theme-toggle w-5 h-5 text-sky-500" id="theme-toggle" aria-title="Toggles light & dark"
+                aria-label="auto" aria-live="polite">
+                <span class="sr-only">Theme</span>
+                <span class="dark:hidden"><svg fill="currentColor" viewBox="0 0 24 24">
+                    <use xlink:href="./dist/svgs/icon.svg#bx-sun" />
+                  </svg></span>
+                <span class="hidden dark:inline"><svg fill="currentColor" viewBox="0 0 24 24">
+                    <use xlink:href="./dist/svgs/icon.svg#bx-moon" />
+                  </svg></span>
+              </button>
+              <a class="w-5 h-5 hidden md:inline-flex text-slate-400 hover:text-slate-500 dark:hover:text-slate-300 ml-6"
+                href="https://github.com/aeonslabs/aeonscss" aria-label="Aeons CSS on GitHub"><span
+                  class="sr-only">Aeons CSS on
+                  GitHub</span><svg viewBox="0 0 24 24" class="w-5 h-5" fill="currentColor">
+                  <use xlink:href="./dist/svgs/icon.svg#bxl-github" />
+                </svg></a>
+            </div>
+          </div>
+          <button class="md:hidden c-hamburger c-hamburger--htx relative z-5" id="burger"> <span></span> </button>
+        </div>
+        <!-- intro -->
+        <section class="max-w-5xl text-center mx-auto xl-px-10 pt-20 sm:pt-24 lg:pt-32">
+          <h1 class="text-slate-900 dark:text-white text-3xl heavy text-spacing sm:lh-4 lh-10">Rapidly build modern
+            websites
+            without
+            ever
+            leaving your
+            HTML.</h1>
+          <p class="max-w-3xl text-slate-600 dark:text-slate-400 text-lg mt-6 mx-auto lh-7 md:lh-6">A utility-first
+            CSS
+            framework
+            packed with
+            classes like <code class="mediumtext-sky-500 dark:text-sky-400">flex</code>, <code
+              class="mediumtext-sky-500 dark:text-sky-400">pt-4</code>,
+            <code class="mediumtext-sky-500 dark:text-sky-400">text-center</code> and <code
+              class="mediumtext-sky-500 dark:text-sky-400">rotate-90</code>
+            that can be composed to
+            build any design, directly in your markup.
+          </p>
+          <div class="mt-6 sm:mt-10 gx-6 flex items-center justify-center text-sm">
+            <a href="#work"
+              class="bg-slate-900 hover:bg-slate-700 focus:outline-none w-full h-12 text-white bold lh-4 flex items-center justify-center rounded-xs px-6 dark:bg-sky-500 dark:hover:bg-sky-400">Get
+              started</a>
+            <button type="button"
+              class="hidden sm:flex items-center w-72 text-left bg-white border-1 text-slate-400 dark:bg-slate-800 focus:outline-none border-slate-100 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-700 h-12 space-x-3 px-5 rounded-xs"><svg
+                viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
+                <use xlink:href="./dist/svgs/icon.svg#bx-search" />
+              </svg><span class="flex-auto">Quick search...</span><kbd class="bold"><abbr title="Command"
+                  class="">⌘</abbr> K</kbd></button>
+          </div>
+        </section>
+      </div>
+    </header>
+  </div>
+
+  <!-- about -->
+  <section class="relative">
+    <div class="px-8 text-center">
+      <h2 class="heavy text-2xl text-slate-900 dark:text-white text-spacing lh-10 md:lh-4">"Best practices" don't
+        actually work.</h2>
+      <p class="mt-6 max-w-3xl mx-auto text-slate-600 dark:text-slate-400 text-lg lh-7 sm:lh-6">I've written <a
+          href="https://adamwathan.me/css-utility-classes-and-separation-of-concerns/"
+          class="boldtext-sky-500 dark:text-sky-400">a
+          few thousand
+          words</a> on why traditional “semantic class names" are the reason CSS is hard to maintain, but the truth is
+        you're never going to believe me until you actually try it. If you can suppress the urge to retch long enough to
+        give it a chance, I really think you'll wonder how you ever worked with CSS any other way.</p>
+      <div class="mt-6 flex items-center justify-center my-4 text-left">
+        <div class="bg-slate-400 w-14 h-14 rounded-full overflow-hidden relative"></div>
+        <div class="ml-4">
+          <div class="text-slate-900 medium dark:text-white">Adam Wathan</div>
+          <div class="mt-0.5 text-sm lh-6">Creator of Aeons CSS</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- work section -->
+  <section class="relative pt-12 mt-12 sm:pt-18 sm:mt-18 md:pt-26 md:mt-26">
+    <div
+      class="bg-position bg-grid-slate border-t-1 border-slate-50 dark:border-slate-800 mask-image-linear-gradient absolute inset-0">
+    </div>
+    <div class="relative max-w-7xl mx-auto px-4 md:px-8">
+      <h2 class="text-md bold text-indigo-500 dark:text-indigo-400">Constaint-based</h2>
+      <p class="mt-4 text-xl heavy text-spacing text-slate-900 dark:text-slate-50 lh-9 md:lh-4">An API for your design
+        system.</p>
+      <p class="mt-4 max-w-3xl text-md lh-6">Utility classes help you work within the
+        constraints of
+        a system instead of
+        littering your stylesheets with arbitrary values. They make it easy to be consistent with color choices,
+        spacing, typography, shadows, and everything else that makes up a well-engineered design system.</p>
+      <a href="#"
+        class="bg-indigo-50 hover:bg-indigo-200 focus:outline-none focus:outline-indigo text-indigo-600 dark:bg-slate-700 dark:text-slate-100 dark:hover:bg-slate-600 dark:hover:text-white dark:focus:outline-slate-500 inline-flex h-9 text-xs bold lh-1 items-center rounded-lg mt-8 px-3 g-2">Learn
+        more<svg class="w-4 h-6 o-30" viewBox="0 0 24 24" fill="currentColor">
+          <use xlink:href="./dist/svgs/icon.svg#bxs-chevron-right" />
+        </svg></a>
+
+      <div class="mt-10">
+        <div class="flex overflow-auto -mx-4 sm:mx-0">
+          <ul class="flex-none inline-grid gap-x-2 px-4 sm:px-0 xl:gap-x-6"
+            style="grid-template-columns:repeat(4, minmax(6rem, 1fr))">
+            <li><button type="button"
+                class="group text-sm medium w-full flex flex-col items-center text-indigo-600 dark:text-indigo-400"><svg
+                  width="48" height="48" fill="none" class="mb-6 text-indigo-500 dark:text-indigo-400">
+                  <rect x="5" y="5" width="28" height="28" rx="4" fill="currentColor" fill-opacity=".1"
+                    stroke="currentColor" stroke-width="2"></rect>
+                  <path d="M5 41h28M33 39v4M5 39v4M39 5h4M39 33h4M41 33V5" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>Sizing</button></li>
+            <li><button type="button" class="group text-sm medium w-full flex flex-col items-center"><svg width="48"
+                  height="48" fill="none"
+                  class="mb-6 text-slate-300 group-hover:text-slate-400 dark:text-slate-600 dark:group-hover:text-slate-500">
+                  <path d="M17.687 42.22 40.57 29.219a4 4 0 0 0 1.554-5.36L39 18" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round"></path>
+                  <path
+                    d="M27.477 7.121a1 1 0 1 0-.954 1.758l.954-1.758Zm5.209 3.966.477-.879-.477.88Zm1.555 5.515-.866-.5-.003.006.87.494ZM26.523 8.88l5.686 3.087.954-1.758-5.686-3.087-.954 1.758Zm6.849 7.23-12.616 22.21 1.738.987 12.617-22.21-1.74-.988Zm-1.163-4.143a3 3 0 0 1 1.166 4.136l1.732 1a5 5 0 0 0-1.944-6.894l-.954 1.758Z"
+                    fill="currentColor"></path>
+                  <path d="M5 9a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4v25a9 9 0 1 1-18 0V9Z" fill="currentColor"
+                    fill-opacity="0" stroke="currentColor" stroke-width="2"></path>
+                  <circle cx="14" cy="34" r="3" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round">
+                  </circle>
+                </svg>Colors</button></li>
+            <li><button type="button" class="group text-sm medium w-full flex flex-col items-center"><svg width="48"
+                  height="48" fill="none"
+                  class="mb-6 text-slate-300 group-hover:text-slate-400 dark:text-slate-600 dark:group-hover:text-slate-500">
+                  <path d="M5 13a8 8 0 0 1 8-8h22a8 8 0 0 1 8 8v22a8 8 0 0 1-8 8H13a8 8 0 0 1-8-8V13Z"
+                    fill="currentColor" fill-opacity="0" stroke="currentColor" stroke-width="2"></path>
+                  <path d="M15.5 25h9M13 31l5.145-12.748c.674-1.67 3.036-1.67 3.71 0L27 31" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                  <path
+                    d="M31 13s2 0 2 1.833v18.334C33 35 31 35 31 35M35 13s-2 0-2 1.833v18.334C33 35 35 35 35 35M31 24h4"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+                </svg>Typography</button></li>
+            <li><button type="button" class="group text-sm medium w-full flex flex-col items-center"><svg width="48"
+                  height="48" fill="none"
+                  class="mb-6 text-slate-300 group-hover:text-slate-400 dark:text-slate-600 dark:group-hover:text-slate-500">
+                  <path
+                    d="M24 43c10.493 0 19-8.507 19-19S34.493 5 24 5m-4 .422C11.427 7.259 5 14.879 5 24c0 9.121 6.427 16.741 15 18.578"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+                  <path
+                    d="M24 42.819V5.181c0-.1.081-.181.181-.181C34.574 5 43 13.607 43 24c0 10.394-8.426 19-18.819 19a.181.181 0 0 1-.181-.181Z"
+                    fill="currentColor" fill-opacity="0" stroke="currentColor" stroke-width="2" stroke-linejoin="round">
+                  </path>
+                  <path d="M28 10h3M28 14h7M28 18h10M28 22h11M28 26h10M28 30h9M28 34h7M28 38h3" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round"></path>
+                </svg>Shadows</button></li>
+          </ul>
+        </div>
+      </div>
+      <div class="flex flex-wrap flex-row group-p-2 mt-6 -mx-2">
+        <div class="col-12 md:col-6 lg:col-4">
+          <div class="card bg-slate-50 dark:bg-slate-700 box-shadow rounded-xs p-4">
+            <h3 class="text-md medium mb-4 flex items-center">
+              Mario Club <span
+                class="text-indigo-600 bg-indigo-400/10 text-xs medium rounded-lg lh-5 ml-2 px-2 py-0.5">In
+                Stock</span>
+            </h3>
+            <div class="bg-gray-1 w-100 h-30 overflow-hidden relative"></div>
+            <div class="mt-4">
+              <p class="text-md lh-6">Lorem ipsum dolor sit amet, consectetur <a href="#"
+                  class="text-indigo medium">adipisicing</a> elit.
+                Totam, hic!</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 md:col-6 lg:col-4">
+          <div class="card bg-slate-50 dark:bg-slate-700 box-shadow rounded-xs p-4">
+            <h3 class="text-md medium mb-4">Ninja Food</h3>
+            <div class="bg-gray-1 w-100 h-30 overflow-hidden relative"></div>
+            <div class="mt-4">
+              <p class="text-md lh-6">Lorem ipsum dolor sit amet, consectetur <a href="#"
+                  class="text-indigo medium">adipisicing</a> elit.
+                Totam, hic!</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 md:col-6 lg:col-4">
+          <div class="card bg-slate-50 dark:bg-slate-700 box-shadow rounded-xs p-4">
+            <h3 class="text-md medium mb-4">Just Add Marmite</h3>
+            <div class="bg-gray-1 w-100 h-30 overflow-hidden relative"></div>
+            <div class="mt-4">
+              <p class="text-md lh-6">Lorem ipsum dolor sit amet, consectetur <a href="#"
+                  class="text-indigo medium">adipisicing</a> elit.
+                Totam, hic!</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 md:col-6 lg:col-4">
+          <div class="card bg-slate-50 dark:bg-slate-700 box-shadow rounded-xs p-4">
+            <h3 class="text-md medium mb-4">Ninja Notes</h3>
+            <div class="bg-gray-1 w-100 h-30 overflow-hidden relative"></div>
+            <div class="mt-4">
+              <p class="text-md lh-6">Lorem ipsum dolor sit amet, consectetur <a href="#"
+                  class="text-indigo medium">adipisicing</a> elit.
+                Totam, hic!</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="gx-6 flex items-center justify-center">
+        <button
+          class="bg-secondary hover:bg-secondary-9 dark:bg-hazel-9 dark:hover:bg-hazel h-12 text-white bold mt-12 lh-4 flex items-center justify-center rounded-xs px-6 text-sm">Explore
+          more</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="relative pt-12 sm:pt-18 md:pt-26">
+    <div class="max-w-7xl mx-auto px-6 px-6 md:px-8">
+      <h2 class="text-md bold text-pink-500 dark:text-pink-400">Build anything</h2>
+      <p class="mt-4 text-xl heavy text-spacing text-slate-900 dark:text-slate-50 lh-9 md:lh-4">Build whatever you want,
+        seriously.
+      </p>
+      <p class="mt-4 max-w-3xl text-md lh-6">Because <span class="text-pink-2 medium">Aeons</span> is so
+        low-level, it never
+        encourages
+        you to design the same
+        site
+        twice. Even with the same color palette and sizing scale, it's easy to build the same component with a
+        completely
+        different look in the next project.</p>
+      <a class="bg-pink-50 hover:bg-pink-200 focus:outline-none focus:outline-pink text-pink-600 dark:bg-slate-700 dark:text-slate-100 dark:hover:bg-slate-600 dark:hover:text-white dark:focus:outline-slate-500 inline-flex h-9 text-xs bold lh-1 items-center rounded-lg mt-8 px-3 g-2"
+        href="/#">Get started<svg class="w-4 h-6 o-30" viewBox="0 0 24 24" fill="currentColor">
+          <use xlink:href="./dist/svgs/icon.svg#bxs-chevron-right" />
+        </svg></a>
+    </div>
+  </section>
+
+  <section class="relative pt-12 sm:pt-18 md:pt-26">
+    <div class="max-w-7xl mx-auto px-6 px-6 md:px-8">
+      <h2 class="text-md bold text-sky-500 dark:text-sky-400">Performance</h2>
+      <p class="mt-4 text-xl heavy text-spacing text-slate-900 dark:text-slate-50 lh-9 md:lh-4">It’s tiny — never ship
+        unused CSS again.
+      </p>
+      <p class="mt-4 max-w-3xl text-md lh-6">Aeons automatically removes all unused CSS when building for production,
+        which means your final CSS bundle is the
+        smallest it could possibly be. In fact, most Aeons projects ship less than 10kB of CSS to the client.</p>
+      <a class="bg-sky-50 hover:bg-sky-200 focus:outline-none focus:outline-sky text-sky-600 dark:bg-slate-700 dark:text-slate-100 dark:hover:bg-slate-600 dark:hover:text-white dark:focus:outline-slate-500 inline-flex h-9 text-xs bold lh-1 items-center rounded-lg mt-8 px-3 g-2"
+        href="/#">Learn more<svg class="w-4 h-6 o-30" viewBox="0 0 24 24" fill="currentColor">
+          <use xlink:href="./dist/svgs/icon.svg#bxs-chevron-right" />
+        </svg></a>
+    </div>
+  </section>
+
+  <!-- footer -->
+  <footer class="pt-16 pb-10">
+    <div class="max-w-7xl grid md:px-8 sm:px-6 px-4 mx-auto">
+      copyright 2021 Shinobi Designs
+    </div>
+  </footer>
+</body>
+
+</html>

@@ -1,0 +1,26 @@
+@import "https://unpkg.com/open-props/easings.min.css";
+// customize theme variables
+$secondary: #0f172a;
+$base-border-thickness: 2px;
+
+// mixins, functions, variables
+@import 'mixins';
+@import 'functions';
+@import 'variables';
+
+// breakpoints
+@import 'breakpoints';
+
+// base & layout
+@import 'base';
+@import 'grid';
+
+// colors
+@import "colors";
+// utilities (margin, padding, opacity, display etc)
+@import 'utilities';
+
+// components (button, card, navbar etc)
+@import 'components/card';
+@import 'components/navbar';
+@import 'components/footer';

@@ -1,0 +1,143 @@
+@use 'sass:math';
+
+$default-min-bp: 320px;
+$default-max-bp: 1440px;
+
+$z-indexes: (
+  "nav",
+  "modal",
+  "sidebar",
+  "header",
+  "footer",
+);
+
+@function round($number, $decimals: 0) {
+  $n: 1;
+
+  @if $decimals >0 {
+    @for $i from 1 through $decimals {
+      $n: $n * 10;
+    }
+  }
+
+  @return math.div(math.round($number * $n), $n);
+}
+
+@function px-to-rem($px) {
+  $rems: math.div($px, 16px) * 1rem;
+  @return $rems;
+}
+
+@function fluid($min-size, $max-size, $min-breakpoint: $default-min-bp, $max-breakpoint: $default-max-bp, $unit: vw) {
+  $slope: math.div($max-size - $min-size, $max-breakpoint - $min-breakpoint);
+  $slope-to-unit: round($slope * 100, 2);
+  $intercept-rem: round(px-to-rem($min-size - $slope * $min-breakpoint), 2);
+  $min-size-rem: round(px-to-rem($min-size), 2);
+  $max-size-rem: round(px-to-rem($max-size), 2);
+  @return clamp(#{$min-size-rem}, #{$slope-to-unit}#{$unit} + #{$intercept-rem}, #{$max-size-rem});
+}
+
+// @function str-replace($string, $search, $replace: "") {
+//   $index: str-index($string, $search);
+
+//   @if $index {
+//     @return str-slice($string, 1, $index - 1)+$replace +str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
+//   }
+
+//   @return $string;
+// }
+
+@function light-comp($color) {
+  $complement: complement($color);
+  $light-complement: lighten($complement, 30%);
+  @return $light-complement;
+}
+
+@function dark-comp($color) {
+  $complement: complement($color);
+  $dark-complement: darken($complement, 30%);
+  @return $dark-complement;
+}
+
+@function hex-to-rgb($hex) {
+  @return red($hex) green($hex) blue($hex);
+}
+
+@function z($name) {
+  @if index($z-indexes, $name) {
+    @return (length($z-indexes) - index($z-indexes, $name))+1;
+  }
+
+  @else {
+    @warn 'There is no item "#{$name}" in this list. Choose one of: #{$z-indexes}';
+    @return null;
+  }
+}
+
+@function tetrad($color) {
+  $hue: hue($color);
+  $saturation: saturation($color);
+  $lightness: lightness($color);
+  $tetrad: (hsl($hue, $saturation, $lightness),
+    hsl($hue + 90 % 360, $saturation, $lightness),
+    hsl($hue + 180 % 360, $saturation, $lightness),
+    hsl($hue + 270 % 360, $saturation, $lightness),
+  );
+
+  @return $tetrad;
+}
+
+@function multiply ($fore, $back) {
+  $red: math.div(red($back) * red($fore), 245);
+  $green: math.div(green($back) * green($fore), 245);
+  $blue: math.div(blue($back) * blue($fore), 245);
+  @return rgb($red, $green, $blue);
+}
+
+@function makeColorPalette($color) {
+  $light: #fefefe;
+  $dark: #07102a;
+  $tetrad: tetrad($color);
+  $palette: (50: mix($light, $color, 93%),
+    100: mix($light, $color, 85.5%),
+    200: mix($light, $color, 70.4%),
+    300: mix($light, $color, 47.8%),
+    400: mix($light, $color, 17.6%),
+    500: mix($light, $color, 0%),
+    600: mix($dark, $color, 20%),
+    700: mix($dark, $color, 45%),
+    800: mix($dark, $color, 72%),
+    900: mix($dark, $color, 87.5%),
+  );
+  @return $palette;
+}
+
+@function map-deep-get($map, $keys...) {
+  @each $key in $keys {
+    $map: map-get($map, $key);
+  }
+
+  @return $map;
+}
+
+@function map-deep-set($map, $keys...
+
+  /*, $value */
+) {
+  $map-list: ($map, );
+  $result: null;
+
+  @if length($keys)==2 {
+    @return map-merge($map, (nth($keys, 1): nth($keys, -1)));
+  }
+
+  @for $i from 1 through length($keys) - 2 {
+    $map-list: append($map-list, map-get(nth($map-list, -1), nth($keys, $i)));
+  }
+
+  @for $i from length($map-list) through 1 {
+    $result: map-merge(nth($map-list, $i), (nth($keys, $i): if($i ==length($map-list), nth($keys, -1), $result)));
+  }
+
+  @return $result;
+}

@@ -1,0 +1,32 @@
+@at-root {
+  @include font-face(Chirpy, '../fonts/chirp-heavy-web', 900, normal, woff);
+  @include font-face(Chirpy, '../fonts/chirp-bold-web', 800, normal, woff);
+  @include font-face(Chirpy, '../fonts/chirp-medium-web', 500, normal, woff);
+  @include font-face(Chirpy, '../fonts/chirp-regular-web', 400, normal, woff);
+
+  :root {
+    --backdrop-none: none;
+    --backdrop-sepia: sepia(.4);
+    --backdrop-invert: invert(.7);
+    --backdrop-opacity: opacity(.4);
+    --backdrop-contrast: contrast(.8);
+    --backdrop-saturate: saturate(1.8);
+    --backdrop-grayscale: grayscale(1);
+    --backdrop-brightness: brightness(1.5);
+    --backdrop-hue-rotate: hue-rotate(120deg);
+    --backdrop-drop-shadow: drop-shadow(4px 4px 10px blue);
+
+    @each $key in map-keys(map-get($palette, colors)) {
+      $val: map-deep-get($palette, "colors", $key);
+      --tm-#{$key}: #{$val};
+      --tm-#{$key}-rgb: #{hex-to-rgb($val)};
+
+      @each $shade,
+      $color in makeColorPalette($val) {
+        @if ($key !='black' and $key !='white') {
+          --tm-#{$key}-#{$shade}: #{$color};
+        }
+      }
+    }
+  }
+}
